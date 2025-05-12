@@ -12,3 +12,4 @@ C:\Users\isaac\source\repos\series-analyzer\series-analyzer\obj\Debug\net9.0\ref
 C:\Users\isaac\source\repos\series-analyzer\series-analyzer\obj\Debug\net9.0\series-analyzer.pdb
 C:\Users\isaac\source\repos\series-analyzer\series-analyzer\obj\Debug\net9.0\series-analyzer.genruntimeconfig.cache
 C:\Users\isaac\source\repos\series-analyzer\series-analyzer\obj\Debug\net9.0\ref\series-analyzer.dll
+C:\Users\isaac\source\repos\series-analyzer\series-analyzer\obj\Debug\net9.0\series-analyzer.sourcelink.json
