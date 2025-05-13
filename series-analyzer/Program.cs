@@ -112,7 +112,7 @@ class Program
 
         string ReceiveSelection()
         {
-            Console.WriteLine("Dear User, please enter your selection (menu number)");
+            Console.WriteLine("\n Dear User,\n please enter your selection\n (menu number) \n");
             var input = Console.ReadLine();
             return (input != null) ? input:"";
         };
@@ -146,31 +146,31 @@ class Program
                 case "5":
                     ActionMessage(choice);
                     int max = MaxValue();
-                    Console.WriteLine($"max: -- {max} -- ");
+                    Console.WriteLine($" --->     max: -- {max} -- ");
                     break;
 
                 case "6":
                     ActionMessage(choice);
                     int min = MinValue();
-                    Console.WriteLine($"min: -- {min} -- ");
+                    Console.WriteLine($" --->     min: -- {min} -- ");
                     break;
 
                 case "7":
                     ActionMessage(choice);
                     double average = Average();
-                    Console.WriteLine($"average: -- {average} -- ");
+                    Console.WriteLine($" --->     average: -- {average} -- ");
                     break;
 
                 case "8":
                     ActionMessage(choice);
                     int len = LenSeries();
-                    Console.WriteLine($" -- {len} -- ");
+                    Console.WriteLine($" --->     len: -- {len} -- ");
                     break;
 
                 case "9":
                     ActionMessage(choice);
                     int sum = SumSeries();
-                    Console.WriteLine($" -- {sum} -- ");
+                    Console.WriteLine($" --->     sum: -- {sum} -- ");
                     break;
 
                 case "10":
@@ -196,7 +196,7 @@ class Program
 
         void ActionMessage(string choice)
         {
-            Console.WriteLine($"Brings out the {menu[int.Parse(choice) - 1] }:");
+            Console.Write($"Brings out the {menu[int.Parse(choice) - 1] }:");
         }
 
         List<int> ReversedOrder()
