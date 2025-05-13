@@ -203,12 +203,15 @@ class Program
         void Wait()
         {
             Thread.Sleep(1000);
+            Console.WriteLine("--- Press any key to continue. ---");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         // Simulates a progress bar for user feedback when an action is performed.
         void PrintProgress()
         {
-            int steps = 10;
+            int steps = 9;
             Console.Write("\n");
             for (int i = 0; i <= steps; i++)
             {
