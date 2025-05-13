@@ -1,5 +1,6 @@
 
 ---
+> 📄 This README file was written with the assistance of AI (ChatGPT by OpenAI) to ensure clarity and structure.
 
 ````markdown
 
