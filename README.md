@@ -2,6 +2,7 @@
 ---
 
 ````markdown
+
 # Number Series Analyzer - C# Console Project
 
 ## 📌 Overview
