@@ -63,7 +63,7 @@ class Program
             // Clears the list before inserting a new value.
             series.Clear();
             // Getting a list - string
-            Console.WriteLine("\nEnter a series of numbers.\nSeparated by a single space.\nAt least three positive numbers required!\n");
+            Console.WriteLine("\nEnter a series of numbers.\nSeparated by a single space or comma .\nAt least three positive numbers required!\n");
             var input = Console.ReadLine();
             return (input != null) ? input:"";
         }
@@ -71,32 +71,29 @@ class Program
         void InputProcessing(string input)
         {   
             bool erro = false;
-            int sumPusetivNum = 0;
-            if (input.Length >= 1)
+
+            foreach (string character in input.Split(' ', ','))
             {
-                foreach (string character in input.Split(" "))
+                bool IsDigit = double.TryParse(character, out double digit);
+                if (IsDigit && digit > 0)
                 {
-                    double digit;
-                    bool IsDigit = double.TryParse(character, out digit);
-                    if (IsDigit)
-                    {
-                        // עיבוד הפלט לרשימת מספרים
-                        series.Add(digit); 
-                        sumPusetivNum += (digit > 0) ? 1:0;
-                    }
-                    else
-                    {
-                        erro = true;
-                    }
+                    series.Add(digit); 
+                }
+                else
+                {
+                    Console.WriteLine("A letter was inserted instead of a number.");
+                    erro = true;
+                    break;
                 }
             }
-            if (LenSeries() >= 3 && sumPusetivNum >= 3 && !erro)
+
+            if (LenSeries() >= 3 && !erro)
             {
                 inputIsProper = true;
             }
             else
             {
-                Console.WriteLine("Non-standard list of numbers!!");
+                Console.WriteLine("The word list does not meet the standards!!");
             }
         }
 
@@ -208,6 +205,7 @@ class Program
 
         void Display(List<double> series)
         {
+            // List print function
             Console.WriteLine("");
             foreach(double num in series)
             {
