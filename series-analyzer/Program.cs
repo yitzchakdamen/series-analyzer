@@ -3,7 +3,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<int> series = new List<int> {};
+        List<double> series = new List<double> {};
         bool exit = false;
         bool inputIsProper;
         string[] menu = new string[10] {
@@ -63,7 +63,7 @@ class Program
             // Clears the list before inserting a new value.
             series.Clear();
             // Getting a list - string
-            Console.WriteLine("Enter a series of numbers separated by spaces.");
+            Console.WriteLine("\nEnter a series of numbers separated by spaces.");
             var input = Console.ReadLine();
             return (input != null) ? input:"";
         }
@@ -76,8 +76,8 @@ class Program
             {
                 foreach (string num in input.Split(" "))
                 {
-                    int NumToInt;
-                    bool IsNum = int.TryParse(num, out NumToInt);
+                    double NumToInt;
+                    bool IsNum = double.TryParse(num, out NumToInt);
                     if (IsNum)
                     {
                         // עיבוד הפלט לרשימת מספרים
@@ -133,25 +133,25 @@ class Program
 
                 case "3":
                     ActionMessage(choice);
-                    List<int> reversed = ReversedOrder();
+                    List<double> reversed = ReversedOrder();
                     Display(reversed);
                     break;
 
                 case "4":
                     ActionMessage(choice);
-                    List<int> sort = sortLest();
+                    List<double> sort = sortLest();
                     Display(sort);
                     break;
 
                 case "5":
                     ActionMessage(choice);
-                    int max = MaxValue();
+                    double max = MaxValue();
                     Console.WriteLine($" --->     max: -- {max} -- ");
                     break;
 
                 case "6":
                     ActionMessage(choice);
-                    int min = MinValue();
+                    double min = MinValue();
                     Console.WriteLine($" --->     min: -- {min} -- ");
                     break;
 
@@ -169,7 +169,7 @@ class Program
 
                 case "9":
                     ActionMessage(choice);
-                    int sum = SumSeries();
+                    double sum = SumSeries();
                     Console.WriteLine($" --->     sum: -- {sum} -- ");
                     break;
 
@@ -184,10 +184,10 @@ class Program
             }
         };
 
-        void Display(List<int> series)
+        void Display(List<double> series)
         {
             Console.WriteLine("");
-            foreach(int num in series)
+            foreach(double num in series)
             {
                 Console.Write($" --  {num}  --  ");
             }
@@ -199,9 +199,9 @@ class Program
             Console.Write($"Brings out the {menu[int.Parse(choice) - 1] }:");
         }
 
-        List<int> ReversedOrder()
+        List<double> ReversedOrder()
         {   
-            List<int> NewList = new List<int> {};
+            List<double> NewList = new List<double> {};
             for (int i = LenSeries() - 1; i >= 0; i--)
             {
                 NewList.Add(series[i]);
@@ -209,9 +209,9 @@ class Program
             return NewList;
         };
 
-        List<int> sortLest()
+        List<double> sortLest()
         {   
-            List<int> copy = new List<int>([..series]);
+            List<double> copy = new List<double>([..series]);
             for (int i = 0; i < LenSeries(); i++)
             {
                 int min = i;
@@ -224,7 +224,7 @@ class Program
                 }
                 if (min != i)
                 {
-                    int temporary = copy[i];
+                    double temporary = copy[i];
                     copy[i] = copy[min];
                     copy[min] = temporary;
                 }
@@ -232,10 +232,10 @@ class Program
             return copy;
         }
 
-        int MaxValue()
+        double MaxValue()
         {
-            int max = series[0];
-            foreach (int num in series)
+            double max = series[0];
+            foreach (double num in series)
             {
                 if (num > max)
                 {
@@ -245,9 +245,9 @@ class Program
             return max;
         };  
 
-        int MinValue()
+        double MinValue()
         {
-            int min = series[0];
+            double min = series[0];
             foreach (int num in series)
             {
                 if (num < min)
@@ -269,10 +269,10 @@ class Program
             return len;
         };
 
-        int SumSeries()
+        double SumSeries()
         {
-            int sum = 0;
-            foreach (int num in series)
+            double sum = 0;
+            foreach (double num in series)
             {
                 sum += num;
             }
@@ -281,7 +281,7 @@ class Program
 
         double Average()
         {
-            return SumSeries() / Convert.ToDouble(LenSeries());
+            return SumSeries() / LenSeries();
         };
     }
 }
