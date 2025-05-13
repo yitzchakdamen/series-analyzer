@@ -3,10 +3,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<double> series = new List<double> {};
-        bool exit = false;
-        bool inputIsProper;
-        string[] menu = new string[10] {
+        // Defining global variables
+        List<double> series = new List<double>(); // The series of numbers for the program
+        bool exit = false;  // The series of numbers for the program
+        bool inputIsProper;  // Checking the correctness of the series
+        string[] menu = new string[10] { 
             "Input a Series. (Replace the current series)",
             "Display the series in the order it was entered.",
             "Display the series in the reversed order it was entered.",
@@ -20,18 +21,21 @@ class Program
             }; 
         
         MainProgram();
-
-        void MainProgram()
+        
+        // Entry point of the main program logic.
+        // Initializes the series and runs the menu loop until the user chooses to exit.
+        void MainProgram() 
         {
-            // Getting a list of numbers
             SeriesManagement(); 
             while (!exit)
             {
-                // Menu activation
                 MenuManagement(); 
             }
         }
 
+        // Manages the input of the number series.
+        // Validates input from command-line arguments or user input.
+        // Ensures at least three positive numbers are entered.
         void SeriesManagement()
         {
             inputIsProper = false;
@@ -51,23 +55,26 @@ class Program
             }
         }
 
+        // Displays the menu and handles user selection to perform operations on the series.
         void MenuManagement()
         {
-            DisplayMenu(); // Printing the menu
-            string choice = ReceiveSelection(); // Accept the choice.
-            PerformOperation(choice); // Performing the selected action
+            DisplayMenu(); 
+            string choice = ReceiveSelection(); 
+            HandleMenuChoice(choice); 
         }
 
+        // Prompts the user to enter a new series of numbers.
+        // Clears the existing series and returns the raw input string.
         string ReceiveSeries()
         {
-            // Clears the list before inserting a new value.
-            series.Clear();
-            // Getting a list - string
+            series.Clear(); 
             Console.WriteLine("\nEnter a series of numbers.\nSeparated by a single space or comma .\nAt least three positive numbers required!\n");
             var input = Console.ReadLine();
             return (input != null) ? input:"";
         }
 
+        // Processes a string of numbers separated by spaces or commas.
+        // Validates that all entries are positive numbers and adds them to the series.   
         void InputProcessing(string input)
         {   
             bool erro = false;
@@ -97,6 +104,7 @@ class Program
             }
         }
 
+        // Displays the menu
         void DisplayMenu()
         {
             Console.WriteLine("_________________________________________________");
@@ -107,6 +115,7 @@ class Program
             Console.WriteLine("_________________________________________________");
         }
 
+        // Prompts the user to enter a menu choice.
         string ReceiveSelection()
         {
             Console.WriteLine("\n Dear User,\n please enter your selection\n (menu number) \n");
@@ -114,7 +123,8 @@ class Program
             return (input != null) ? input:"";
         };
 
-        void PerformOperation(string choice)
+        // Executes the selected operation based on the user's menu choice.
+        void HandleMenuChoice(string choice)
         {
             switch (choice)
             {
@@ -126,56 +136,56 @@ class Program
                 case "2":
                     ActionMessage(choice);
                     Display(series);
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "3":
                     ActionMessage(choice);
                     List<double> reversed = ReversedOrder();
                     Display(reversed);
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "4":
                     ActionMessage(choice);
-                    List<double> sort = sortLest();
+                    List<double> sort = SortLest();
                     Display(sort);
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "5":
                     ActionMessage(choice);
                     double max = MaxValue();
                     Console.WriteLine($" --->     max: -- {max} -- ");
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "6":
                     ActionMessage(choice);
                     double min = MinValue();
                     Console.WriteLine($" --->     min: -- {min} -- ");
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "7":
                     ActionMessage(choice);
                     double average = Average();
                     Console.WriteLine($" --->     average: -- {average} -- ");
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "8":
                     ActionMessage(choice);
                     int len = LenSeries();
                     Console.WriteLine($" --->     len: -- {len} -- ");
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "9":
                     ActionMessage(choice);
                     double sum = SumSeries();
                     Console.WriteLine($" --->     sum: -- {sum} -- ");
-                    Thread.Sleep(2000);
+                    Wait();
                     break;
 
                 case "10":
@@ -185,14 +195,20 @@ class Program
 
                 default:
                     Console.WriteLine("Wrong choice!!");
-                    Thread.Sleep(2000);
+                    
                     break;
             }
-        };
+        }
 
+        void Wait()
+        {
+            Thread.Sleep(1000);
+        }
+
+        // Simulates a progress bar for user feedback when an action is performed.
         void PrintProgress()
         {
-            int steps = 20;
+            int steps = 10;
             Console.Write("\n");
             for (int i = 0; i <= steps; i++)
             {
@@ -203,6 +219,7 @@ class Program
             Console.WriteLine("\n");
         }
 
+        // Displays the elements of a given number list to the console.
         void Display(List<double> series)
         {
             // List print function
@@ -214,6 +231,7 @@ class Program
             Console.WriteLine("");
         }
 
+        // Displays a message indicating which action is being performed based on the user's choice.
         void ActionMessage(string choice)
         {
             Console.Write($"Brings out the {menu[int.Parse(choice) - 1] }:");
@@ -230,27 +248,27 @@ class Program
             return ReverseList;
         };
 
-        List<double> sortLest()
+        List<double> SortLest()
         {   
-            List<double> list = new List<double>(series);
+            List<double> sortLest = new List<double>(series);
             for (int i = 0; i < LenSeries(); i++)
             {
                 int min = i;
                 for (int j = i + 1; j < LenSeries(); j++)
                 {
-                    if (list[j] < list[min])
+                    if (sortLest[j] < sortLest[min])
                     {
                         min = j;
                     }
                 }
                 if (min != i)
                 {
-                    double temporary = list[i];
-                    list[i] = list[min];
-                    list[min] = temporary;
+                    double temporary = sortLest[i];
+                    sortLest[i] = sortLest[min];
+                    sortLest[min] = temporary;
                 }
             }
-            return list;
+            return sortLest;
         }
 
         double MaxValue()
@@ -283,7 +301,7 @@ class Program
         int LenSeries()
         {
             int len = 0;
-            foreach (int num in series)
+            foreach (double num in series)
             {
                 len += 1;
             }
