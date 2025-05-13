@@ -1,0 +1,28 @@
+        void ProgressBarFira(int steps = 20, int delay = 100)
+        {
+            // ------ >> This function is done by GPT chat at my request. << ------
+            // ----- >> הפונקציה הזאת עובד טוב רק עם הגופן Fira Code >> ------
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            string start = "\uEE00";
+            string end = "\uEE02";
+            string fill = "\uEE01"; // קו אופקי
+            string fullBlock = "\uEE04"; // בלוק מלא
+
+            Console.Write("⏳ Progress: ");
+            for (int i = 0; i <= steps; i++)
+            {
+                double percent = (double)i / steps;
+                int fillCount = (int)(percent * steps);
+
+                string bar = start;
+                bar += new string(fullBlock[0], fillCount);
+                bar += new string(fill[0], steps - fillCount);
+                bar += end;
+
+                Console.Write($"\r⏳ Progress: {bar} {(int)(percent * 100)}%   ");
+                Thread.Sleep(delay);
+            }
+
+            Console.WriteLine("\n✔ Done!");
+        }

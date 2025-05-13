@@ -63,7 +63,7 @@ class Program
             // Clears the list before inserting a new value.
             series.Clear();
             // Getting a list - string
-            Console.WriteLine("\nEnter a series of numbers separated by spaces.");
+            Console.WriteLine("\nEnter a series of numbers.\nSeparated by a single space.\nAt least three positive numbers required!\n");
             var input = Console.ReadLine();
             return (input != null) ? input:"";
         }
@@ -74,15 +74,15 @@ class Program
             int sumPusetivNum = 0;
             if (input.Length >= 1)
             {
-                foreach (string num in input.Split(" "))
+                foreach (string character in input.Split(" "))
                 {
-                    double NumToInt;
-                    bool IsNum = double.TryParse(num, out NumToInt);
-                    if (IsNum)
+                    double digit;
+                    bool IsDigit = double.TryParse(character, out digit);
+                    if (IsDigit)
                     {
                         // עיבוד הפלט לרשימת מספרים
-                        series.Add(NumToInt); 
-                        sumPusetivNum += (NumToInt > 0) ? 1:0;
+                        series.Add(digit); 
+                        sumPusetivNum += (digit > 0) ? 1:0;
                     }
                     else
                     {
@@ -129,48 +129,56 @@ class Program
                 case "2":
                     ActionMessage(choice);
                     Display(series);
+                    Thread.Sleep(2000);
                     break;
 
                 case "3":
                     ActionMessage(choice);
                     List<double> reversed = ReversedOrder();
                     Display(reversed);
+                    Thread.Sleep(2000);
                     break;
 
                 case "4":
                     ActionMessage(choice);
                     List<double> sort = sortLest();
                     Display(sort);
+                    Thread.Sleep(2000);
                     break;
 
                 case "5":
                     ActionMessage(choice);
                     double max = MaxValue();
                     Console.WriteLine($" --->     max: -- {max} -- ");
+                    Thread.Sleep(2000);
                     break;
 
                 case "6":
                     ActionMessage(choice);
                     double min = MinValue();
                     Console.WriteLine($" --->     min: -- {min} -- ");
+                    Thread.Sleep(2000);
                     break;
 
                 case "7":
                     ActionMessage(choice);
                     double average = Average();
                     Console.WriteLine($" --->     average: -- {average} -- ");
+                    Thread.Sleep(2000);
                     break;
 
                 case "8":
                     ActionMessage(choice);
                     int len = LenSeries();
                     Console.WriteLine($" --->     len: -- {len} -- ");
+                    Thread.Sleep(2000);
                     break;
 
                 case "9":
                     ActionMessage(choice);
                     double sum = SumSeries();
                     Console.WriteLine($" --->     sum: -- {sum} -- ");
+                    Thread.Sleep(2000);
                     break;
 
                 case "10":
@@ -180,9 +188,23 @@ class Program
 
                 default:
                     Console.WriteLine("Wrong choice!!");
+                    Thread.Sleep(2000);
                     break;
             }
         };
+
+        void PrintProgress()
+        {
+            int steps = 20;
+            Console.Write("\n");
+            for (int i = 0; i <= steps; i++)
+            {
+                double percent = (double)i / steps;
+                Console.Write($"\rProgress:  {(int)(percent * 100)}%   ");
+                Thread.Sleep(100);
+            }
+            Console.WriteLine("\n");
+        }
 
         void Display(List<double> series)
         {
@@ -197,39 +219,40 @@ class Program
         void ActionMessage(string choice)
         {
             Console.Write($"Brings out the {menu[int.Parse(choice) - 1] }:");
+            PrintProgress(); // הדפסת התקדמות
         }
 
         List<double> ReversedOrder()
         {   
-            List<double> NewList = new List<double> {};
+            List<double> ReverseList = new List<double> {};
             for (int i = LenSeries() - 1; i >= 0; i--)
             {
-                NewList.Add(series[i]);
+                ReverseList.Add(series[i]);
             }
-            return NewList;
+            return ReverseList;
         };
 
         List<double> sortLest()
         {   
-            List<double> copy = new List<double>([..series]);
+            List<double> list = new List<double>(series);
             for (int i = 0; i < LenSeries(); i++)
             {
                 int min = i;
                 for (int j = i + 1; j < LenSeries(); j++)
                 {
-                    if (copy[j] < copy[min])
+                    if (list[j] < list[min])
                     {
                         min = j;
                     }
                 }
                 if (min != i)
                 {
-                    double temporary = copy[i];
-                    copy[i] = copy[min];
-                    copy[min] = temporary;
+                    double temporary = list[i];
+                    list[i] = list[min];
+                    list[min] = temporary;
                 }
             }
-            return copy;
+            return list;
         }
 
         double MaxValue()
@@ -248,7 +271,7 @@ class Program
         double MinValue()
         {
             double min = series[0];
-            foreach (int num in series)
+            foreach (double num in series)
             {
                 if (num < min)
                 {
